@@ -1,21 +1,19 @@
 from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
-from src.python.cell import Cell
+from kivy.core.window import Window
 
-DEFAULT_BOMBS = 150
-DEFAULT_WIDTH = 30
-DEFAULT_HEIGHT = 30
+from grid import Grid
 
 
 class MinesweeperApp(App):
+    def __init__(self, **kwargs):
+        super(MinesweeperApp, self).__init__(**kwargs)
+
+        self.window = Window
+        self.window.fullscreen = 'auto'
+        self.window.maximize()
+
     def build(self):
-        grid = GridLayout()
-        grid.cols = DEFAULT_WIDTH
-        grid.rows = DEFAULT_HEIGHT
-        cells = [Cell(x, y) for x in range(grid.cols) for y in range(grid.rows)]
-        for cell in cells:
-            grid.add_widget(cell)
-        return grid
+        return Grid().grid
 
 
 if __name__ == '__main__':
