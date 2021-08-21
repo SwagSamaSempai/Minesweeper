@@ -1,6 +1,6 @@
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
-from cell import Cell
+from src.python.cell import Cell
 
 DEFAULT_BOMBS = 150
 DEFAULT_WIDTH = 30
