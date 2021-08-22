@@ -1,0 +1,35 @@
+<OptionsScreen>:
+    width_input: width_input
+    height_input: height_input
+    bombs_count_input: bombs_count_input
+
+    GridLayout:
+        cols: 1
+        rows: 2
+
+        GridLayout:
+            cols: 2
+            rows: 3
+
+            Label:
+                text: "Width:"
+            TextInput:
+                id: width_input
+                multiline: False
+                text: "10"
+            Label:
+                text: "Height:"
+            TextInput:
+                id: height_input
+                multiline: False
+                text: "10"
+            Label:
+                text: "Bombs Count:"
+            TextInput:
+                id: bombs_count_input
+                multiline: False
+                text: "10"
+
+        Button:
+            text: "Start!"
+            on_release: root.start_game()

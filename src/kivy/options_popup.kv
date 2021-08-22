@@ -1,0 +1,19 @@
+<OptionsPopup>:
+    label: label
+    auto_dismiss: False
+    title: "Invalid Input"
+    size_hint: (.75, .35)
+
+    FloatLayout:
+        Label:
+            id: label
+            halign: 'center'
+            valign: 'top'
+            text_size: self.parent.size
+            pos_hint: {'x': 0, 'top': 0.9}
+
+        Button:
+            text: "Close"
+            size_hint: (.9, .2)
+            pos_hint: {'x': .05, 'y': .05}
+            on_release: root.dismiss()
