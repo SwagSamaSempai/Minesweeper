@@ -3,14 +3,15 @@ from kivy.uix.gridlayout import GridLayout
 
 from cell import Cell
 
-Builder.load_file('../src/kivy/gridlayout.kv')
+Builder.load_file('../src/kivy/grid_layout.kv')
 
 
 class Grid(GridLayout):
-    def __init__(self, **kwargs):
+    def __init__(self, width, height, bombs_count, **kwargs):
         super(Grid, self).__init__(**kwargs)
 
-        self.grid = GridLayout()
-        self.cells = [Cell(x, y) for x in range(self.grid.cols) for y in range(self.grid.rows)]
+        self.cols = width
+        self.rows = height
+        self.cells = [Cell(x, y) for x in range(width) for y in range(height)]
         for cell in self.cells:
-            self.grid.add_widget(cell)
+            self.add_widget(cell)
