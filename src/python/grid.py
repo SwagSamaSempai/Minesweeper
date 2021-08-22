@@ -21,8 +21,13 @@ class Grid(GridLayout):
             row = []
             for x in range(width):
                 cell = Cell(x, y)
-                if y * width + x in bombs:
-                    cell.value = 'B'
                 self.add_widget(cell)
                 row.append(cell)
             self.cells.append(row)
+
+        for index in bombs:
+            y = index // width
+            x = index % width
+            self.cells[y][x].set_value('B')
+            for x, y in self.cells[y][x].get_neighbors(width, height):
+                self.cells[y][x].inc_value()
