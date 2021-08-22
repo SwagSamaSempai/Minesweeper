@@ -29,4 +29,4 @@ class OptionsScreen(Screen):
 
     def validate_inputs(self):
         inputs = [self.width_input.text, self.height_input.text, self.bombs_count_input.text]
-        return [f'{arg}\n' for arg in inputs if not (arg.isnumeric() and int(arg) > 0)]
+        return [f'{arg}\n' for arg in inputs if not int(arg) > 0]

@@ -10,4 +10,4 @@ class OptionsPopup(Popup):
 
     def __init__(self, invalid_inputs, **kwargs):
         super(OptionsPopup, self).__init__(**kwargs)
-        self.label.text = f"These inputs are invalid:\n{''.join(invalid_inputs)}Please only use numbers."
+        self.label.text = f"These inputs are invalid:\n{''.join(invalid_inputs)}Use positive integers."
