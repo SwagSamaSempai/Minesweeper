@@ -20,6 +20,11 @@ class OptionsScreen(Screen):
             OptionsPopup(invalid_inputs).open()
             return
 
+        width = int(self.width_input.text)
+        height = int(self.height_input.text)
+        bombs_count = int(self.bombs_count_input.text)
+        game_screen = self.manager.get_screen('game')
+        game_screen.start(width, height, bombs_count)
         self.manager.current = 'game'
 
     def validate_inputs(self):
