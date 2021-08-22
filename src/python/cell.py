@@ -6,9 +6,10 @@ Builder.load_file('../src/kivy/cell.kv')
 
 class Cell(Button):
     def __init__(self, x, y, **kwargs):
-        self.x = x
-        self.y = y
+        self.col = x
+        self.row = y
         self.value = 0
+        self.revealed = False
 
         super(Cell, self).__init__(**kwargs)
 
@@ -21,16 +22,23 @@ class Cell(Button):
     def set_value(self, value):
         self.value = value
 
+    def get_value(self):
+        return self.value
+
     def inc_value(self):
         if isinstance(self.value, int):
             self.value += 1
 
-    def show_value(self):
+    def reveal(self):
+        self.revealed = True
         self.text = str(self.value)
 
+    def is_revealed(self):
+        return self.revealed
+
     def get_neighbors(self, width, height):
-        for y in self.get_indices(self.y, height):
-            for x in self.get_indices(self.x, width):
+        for y in self.get_indices(self.row, height):
+            for x in self.get_indices(self.col, width):
                 yield x, y
 
     @staticmethod

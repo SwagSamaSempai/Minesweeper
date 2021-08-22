@@ -31,3 +31,10 @@ class Grid(GridLayout):
             self.cells[y][x].set_value('B')
             for x, y in self.cells[y][x].get_neighbors(width, height):
                 self.cells[y][x].inc_value()
+
+    def reveal_cell_rec(self, x, y):
+        self.cells[y][x].reveal()
+        if not self.cells[y][x].get_value():
+            for col, row in self.cells[y][x].get_neighbors(self.cols, self.rows):
+                if not self.cells[row][col].is_revealed():
+                    self.reveal_cell_rec(col, row)
