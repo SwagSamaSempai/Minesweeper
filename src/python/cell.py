@@ -31,7 +31,9 @@ class Cell(Button):
 
     def reveal(self):
         self.revealed = True
-        self.text = str(self.value)
+        self.disabled = True
+        if self.value:
+            self.text = str(self.value)
 
     def is_revealed(self):
         return self.revealed
