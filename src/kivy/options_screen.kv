@@ -1,6 +1,6 @@
 <OptionsScreen>:
-    width_input: width_input
     height_input: height_input
+    width_input: width_input
     bombs_count_input: bombs_count_input
 
     BoxLayout:
@@ -11,21 +11,14 @@
         pos_hint: {'center_x': .5, 'center_y': .5}
 
         GridLayout:
-            cols: 2
-            rows: 3
             spacing: 5
+            rows: 3
             row_default_height: 30
             row_force_default: True
+            cols: 2
             col_default_width: 122.5
             col_force_default: True
 
-            Label:
-                text: "Width:"
-            TextInput:
-                id: width_input
-                input_filter: 'int'
-                multiline: False
-                text: "5"
             Label:
                 text: "Height:"
             TextInput:
@@ -33,6 +26,13 @@
                 input_filter: 'int'
                 multiline: False
                 text: "15"
+            Label:
+                text: "Width:"
+            TextInput:
+                id: width_input
+                input_filter: 'int'
+                multiline: False
+                text: "5"
             Label:
                 text: "Bombs Count:"
             TextInput:

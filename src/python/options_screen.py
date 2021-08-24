@@ -10,8 +10,8 @@ Window.size = (300, 600)
 
 
 class OptionsScreen(Screen):
-    width_input = ObjectProperty()
     height_input = ObjectProperty()
+    width_input = ObjectProperty()
     bombs_count_input = ObjectProperty()
 
     def start_game(self):
@@ -20,11 +20,11 @@ class OptionsScreen(Screen):
             OptionsPopup(invalid_inputs).open()
             return
 
-        width = int(self.width_input.text)
         height = int(self.height_input.text)
+        width = int(self.width_input.text)
         bombs_count = int(self.bombs_count_input.text)
         game_screen = self.manager.get_screen('game')
-        game_screen.start(width, height, bombs_count)
+        game_screen.start(height, width, bombs_count)
         self.manager.current = 'game'
 
     def validate_inputs(self):

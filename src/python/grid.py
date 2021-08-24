@@ -9,38 +9,37 @@ Builder.load_file('../src/kivy/grid_layout.kv')
 
 
 class Grid(GridLayout):
-    def __init__(self, width, height, bombs_count, **kwargs):
-        self.cols = width
+    def __init__(self, height, width, bombs_count, **kwargs):
         self.rows = height
+        self.cols = width
         self.cells = []
-        self.to_reveal = width * height - bombs_count
+        self.to_reveal = height * width - bombs_count
 
         super(Grid, self).__init__(**kwargs)
 
-        bombs = sample(range(width * height), bombs_count)
-        for y in range(height):
-            row = []
-            for x in range(width):
-                cell = Cell(x, y)
+        bombs = sample(range(height * width), bombs_count)
+        for row in range(height):
+            temp = []
+            for col in range(width):
+                cell = Cell(row, col)
                 self.add_widget(cell)
-                row.append(cell)
-            self.cells.append(row)
+                temp.append(cell)
+            self.cells.append(temp)
 
         for index in bombs:
-            y = index // width
-            x = index % width
-            self.cells[y][x].set_value('B')
-            for x, y in self.cells[y][x].get_neighbors(width, height):
-                self.cells[y][x].inc_value()
+            row, col = divmod(index, width)
+            self.cells[row][col].set_value('B')
+            for row, col in self.cells[row][col].get_neighbors(height, width):
+                self.cells[row][col].inc_value()
 
-    def reveal_cell_rec(self, x, y):
-        self.cells[y][x].reveal()
-        if self.cells[y][x].get_value() == 'B':
+    def reveal_cell_rec(self, row, col):
+        self.cells[row][col].reveal()
+        if self.cells[row][col].get_value() == 'B':
             self.parent.end_game(False)
         self.to_reveal -= 1
         if not self.to_reveal:
             self.parent.end_game(True)
-        if not self.cells[y][x].get_value():
-            for col, row in self.cells[y][x].get_neighbors(self.cols, self.rows):
+        if not self.cells[row][col].get_value():
+            for row, col in self.cells[row][col].get_neighbors(self.rows, self.cols):
                 if not self.cells[row][col].is_revealed():
-                    self.reveal_cell_rec(col, row)
+                    self.reveal_cell_rec(row, col)

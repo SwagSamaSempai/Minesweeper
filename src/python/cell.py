@@ -5,9 +5,9 @@ Builder.load_file('../src/kivy/cell.kv')
 
 
 class Cell(Button):
-    def __init__(self, x, y, **kwargs):
-        self.col = x
-        self.row = y
+    def __init__(self, row, col, **kwargs):
+        self.row = row
+        self.col = col
         self.value = 0
         self.revealed = False
 
@@ -38,10 +38,11 @@ class Cell(Button):
     def is_revealed(self):
         return self.revealed
 
-    def get_neighbors(self, width, height):
-        for y in self.get_indices(self.row, height):
-            for x in self.get_indices(self.col, width):
-                yield x, y
+    def get_neighbors(self, height, width):
+        for row in self.get_indices(self.row, height):
+            for col in self.get_indices(self.col, width):
+                if not (row == self.row and col == self.col):
+                    yield row, col
 
     @staticmethod
     def get_indices(value, limit):

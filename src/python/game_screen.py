@@ -12,8 +12,8 @@ class GameScreen(Screen):
         self.timer = None
         self.grid = None
 
-    def start(self, width, height, bombs_count):
-        self.grid = Grid(width, height, bombs_count)
+    def start(self, height, width, bombs_count):
+        self.grid = Grid(height, width, bombs_count)
         self.add_widget(self.grid)
         self.timer = perf_counter()
 
