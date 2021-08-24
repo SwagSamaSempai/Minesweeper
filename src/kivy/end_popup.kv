@@ -1,0 +1,19 @@
+<EndPopup>:
+    label: label
+    auto_dismiss: False
+    title: "Game Over"
+    size_hint: (.75, .35)
+
+    FloatLayout:
+        Label:
+            id: label
+            halign: 'center'
+            valign: 'top'
+            text_size: self.parent.size
+            pos_hint: {'x': 0, 'top': 0.9}
+
+        Button:
+            text: "Back to Start"
+            size_hint: (.9, .2)
+            pos_hint: {'x': .05, 'y': .05}
+            on_release: root.dismiss(); root.manager.current = 'options'

@@ -13,6 +13,7 @@ class Grid(GridLayout):
         self.cols = width
         self.rows = height
         self.cells = []
+        self.to_reveal = width * height - bombs_count
 
         super(Grid, self).__init__(**kwargs)
 
@@ -34,6 +35,11 @@ class Grid(GridLayout):
 
     def reveal_cell_rec(self, x, y):
         self.cells[y][x].reveal()
+        if self.cells[y][x].get_value() == 'B':
+            self.parent.end_game(False)
+        self.to_reveal -= 1
+        if not self.to_reveal:
+            self.parent.end_game(True)
         if not self.cells[y][x].get_value():
             for col, row in self.cells[y][x].get_neighbors(self.cols, self.rows):
                 if not self.cells[row][col].is_revealed():
